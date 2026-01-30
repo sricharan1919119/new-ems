@@ -1,0 +1,102 @@
+.comp-container {
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Header */
+.comp-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.comp-search-input {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  min-width: 220px;
+}
+
+.comp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.comp-total-count {
+  border: 1px solid #000;
+  padding: 4px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+.comp-add-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+}
+
+/* Table */
+.comp-table-wrapper {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.comp-table th,
+.comp-table td {
+  border: 2px solid #000;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.comp-table thead {
+  background-color: #e6e6e6;
+}
+
+/* .comp-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+} */
+
+/* Pagination */
+.comp-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+.comp-pagination span {
+  font-size: 14px;
+}
+
+.comp-active {
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comp-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comp-header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
