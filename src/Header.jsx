@@ -6,6 +6,7 @@ import "./Header.css";
 const Header = ({ onMenuClick, isSidebarCollapsed }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   const [showSearch, setShowSearch] = useState(false);
+  console.log("")
 
   useEffect(() => {
     const handleResize = () => {
