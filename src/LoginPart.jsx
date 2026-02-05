@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Logo from "./assets/Screenshot.png";
+import { loginUser } from "./services/auth";
 
 const LoginPart = () => {
   const navigate = useNavigate();
@@ -32,24 +32,11 @@ const LoginPart = () => {
     setErrorMsg("");
 
     try {
-      const response = await axios.post(
-        "/api/auth/signin", // uses Vite proxy
-        {
-          email: formData.email,
-          password: formData.password
-        },
-        {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
-
+      const response = await loginUser(formData.email,formData.password)
       if (response.status === 200) {
         console.log("Login successful");
-        // You can store token here if needed
-        // localStorage.setItem("token", response.data.token);
-        navigate("/home"); // change as required
+        localStorage.setItem("token", response.data.token);
+        navigate("/home");
       }
     } catch (error) {
       setErrorMsg(

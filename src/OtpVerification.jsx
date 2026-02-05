@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import Logo from "./assets/Screenshot.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { verifyOtp } from "./services/auth";
 
 export default function OtpVerification() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -46,16 +46,7 @@ export default function OtpVerification() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "/api/auth/verify-otp",
-        {
-          email,
-          otp: enteredOtp,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await verifyOtp(email,enteredOtp)
 
       if (response.status === 200) {
         navigate("/login");

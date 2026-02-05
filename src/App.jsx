@@ -8,6 +8,7 @@ import OtpVerification from "./OtpVerification";
 import CompanyTable from "./company/CompanyTable";
 import CompanyForm from "./company/CompanyForm";
 import Cookies from "js-cookie";
+import Logout from "./Logout";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/:moduleName" element={<Home />} />
         <Route path="/companies" element={<CompanyTable />} />
         <Route path="/company-form" element={<CompanyForm />} />
+         <Route path="/logout" element={<Logout />} />
         </Route>
       </Routes>
   );

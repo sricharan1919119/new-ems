@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Logo from './assets/Screenshot.png';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import { registerUser } from './services/auth';
 
 const SignupPart = () => {
   const navigate = useNavigate();
@@ -77,16 +77,7 @@ const SignupPart = () => {
     };
 
     try {
-      const response = await axios.post(
-        "/api/auth/register",
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
-
+      const response = await registerUser(payload) 
       if (response.status === 200) {
         setResponseMsg(response.data.message || "Signup successful");
          navigate(`/otpverification/${formData.email}`);

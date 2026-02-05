@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./CompanyForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { createCompany } from "../services/auth";
 
 
 
@@ -9,7 +10,7 @@ const CompanyForm = () => {
     const [formData, setFormData] = useState({
         companyName: "",
         establishmentCardNo: "",
-        category: "Category-1",
+        category: "Category_1",
         countryCode: "+971",
         mobileNumber: "",
         city: "",
@@ -20,7 +21,6 @@ const CompanyForm = () => {
     });
 
     const navigate = useNavigate();
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -46,18 +46,11 @@ const CompanyForm = () => {
         };
 
         try {
-            const response = await axios.post(
-                "/api/company",
-                payload,
-                {
-                    withCredentials: true
-
-                }
-            );
+            const response = await createCompany(payload)
 
             if (response.status === 200 || response.status === 201) {
                 console.log("Success:", response.data);
-                alert("Form submitted successfully");
+                navigate("/companies")
             }
         } catch (error) {
             if (error.response) {
@@ -116,8 +109,8 @@ const CompanyForm = () => {
                         value={formData.category}
                         onChange={handleChange}
                     >
-                        <option value="Category-1">Category-1</option>
-                        <option value="Category-2">Category-2</option>
+                        <option value="Category_1">Category-1</option>
+                        <option value="Category_2">Category-2</option>
                     </select>
                 </div>
 

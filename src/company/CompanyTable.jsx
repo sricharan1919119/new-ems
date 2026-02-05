@@ -1,21 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CompanyTable.css";
 import { useNavigate } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
+import axios from "axios";
+import { getCompany } from "../services/auth";
 
 const CompanyTable = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const [companyData,setCompanyData] = useState(null)
 
-  const data = Array.from({ length: 7 }).map((_, i) => ({
-    id: i + 1,
-    companyId: "xvdad",
-    companyName: "1254865565",
-    category: "2",
-    employees: "55",
-    established: "",
-    expiry: "",
-  }));
+
+  useEffect(() => {
+    const handleGetData = async () => {
+      try {
+        const response = await getCompany()
+        if (response.status === 200 || response.status === 201) {
+          console.log("Success:", response.data);
+          setCompanyData(response.data.content)
+        }
+      } catch (error) {
+        if (error.response) {
+          console.error("API Error:", error.response.data);
+          alert(error.response.data.message || "Submission failed");
+        } else {
+          console.error("Network Error:", error);
+          alert("Server not reachable");
+        }
+      }
+    }
+    handleGetData()
+  }, [])
 
   return (
     <div className="comp-container">
@@ -52,15 +67,15 @@ const CompanyTable = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {companyData && companyData?.map((item, index) => (
               <tr key={index}>
-                <td>{item.id}</td>
+                <td>{index + 1}</td>
                 <td>{item.companyId}</td>
                 <td>{item.companyName}</td>
-                <td>{item.category}</td>
+                <td>{item.categoryName}</td>
                 <td>{item.employees}</td>
-                <td>{item.established}</td>
-                <td>{item.expiry}</td>
+                <td>{item.establishmentDate}</td>
+                <td>{item.expiryDate}</td>
               </tr>
             ))}
           </tbody>
